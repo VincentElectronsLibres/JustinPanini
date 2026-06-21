@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ Mon Album Panini Coupe du Monde 2026</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ÉCRAN DE CONNEXION -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <div class="login-emoji">⚽🏆</div>
+    <h1>Mon Album Panini</h1>
+    <p class="login-sub">Coupe du Monde FIFA 2026™</p>
+    <form id="login-form">
+      <input type="password" id="login-password" placeholder="Mot de passe" autocomplete="current-password" required>
+      <button type="submit">Entrer</button>
+    </form>
+    <p id="login-error" class="login-error" hidden>Mot de passe incorrect, réessaie !</p>
+  </div>
+</div>
+
+<!-- APPLICATION -->
+<div id="app" class="app" hidden>
+
+  <header class="app-header">
+    <div class="header-top">
+      <h1>⚽ Mon Album Panini 2026</h1>
+      <button id="logout-btn" class="icon-btn" title="Se déconnecter">🔒</button>
+    </div>
+    <div class="progress-summary">
+      <div class="progress-bar-outer">
+        <div id="global-progress-bar" class="progress-bar-inner"></div>
+      </div>
+      <div id="global-progress-text" class="progress-text">0 / 980</div>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="search">🔍 Chercher</button>
+    <button class="tab-btn" data-tab="album">📖 Album</button>
+    <button class="tab-btn" data-tab="trade">🔁 Échanges</button>
+    <button class="tab-btn" data-tab="settings">⚙️ Réglages</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- ONGLET RECHERCHE -->
+    <section id="tab-search" class="tab-panel active">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Tape une référence (ex: MEX5, FWC3, ARG17...)" autocomplete="off" autocapitalize="characters">
+      </div>
+      <div id="search-result" class="search-result"></div>
+      <div id="undo-bar" class="undo-bar" hidden>
+        <span id="undo-text"></span>
+        <button id="undo-btn">↩️ Annuler</button>
+      </div>
+      <div class="recent-box">
+        <h3>Dernières recherches</h3>
+        <div id="recent-list" class="recent-list"></div>
+      </div>
+    </section>
+
+    <!-- ONGLET ALBUM -->
+    <section id="tab-album" class="tab-panel">
+      <div class="album-filter">
+        <input type="text" id="team-filter" placeholder="Filtrer une équipe...">
+      </div>
+      <div id="special-section" class="team-section"></div>
+      <div id="teams-list"></div>
+    </section>
+
+    <!-- ONGLET ÉCHANGES -->
+    <section id="tab-trade" class="tab-panel">
+      <div class="trade-columns">
+        <div class="trade-col">
+          <h3>🔁 Mes doubles <span id="doubles-count" class="count-badge">0</span></h3>
+          <p class="trade-help">Cartes que tu as en plus d'un exemplaire — à échanger avec tes copains !</p>
+          <div id="doubles-list" class="trade-list"></div>
+          <button id="copy-doubles" class="secondary-btn">📋 Copier la liste</button>
+        </div>
+        <div class="trade-col">
+          <h3>❌ Cartes manquantes <span id="missing-count" class="count-badge">0</span></h3>
+          <p class="trade-help">Liste à emmener au kiosque ou à montrer à un copain !</p>
+          <div id="missing-list" class="trade-list"></div>
+          <button id="copy-missing" class="secondary-btn">📋 Copier la liste</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONGLET RÉGLAGES -->
+    <section id="tab-settings" class="tab-panel">
+      <div class="settings-block">
+        <h3>📊 Statistiques</h3>
+        <div id="stats-grid" class="stats-grid"></div>
+      </div>
+      <div class="settings-block">
+        <h3>💾 Sauvegarde</h3>
+        <p class="settings-help">Ta collection est sauvegardée automatiquement dans ce navigateur. Pour la garder en sécurité ou la transférer sur un autre appareil, exporte une sauvegarde :</p>
+        <button id="export-btn" class="secondary-btn">⬇️ Exporter ma collection</button>
+        <label for="import-input" class="secondary-btn file-label">⬆️ Importer une sauvegarde</label>
+        <input type="file" id="import-input" accept=".json" hidden>
+        <p id="import-status" class="import-status"></p>
+      </div>
+      <div class="settings-block">
+        <h3>⚠️ Zone danger</h3>
+        <button id="reset-btn" class="danger-btn">🗑️ Tout effacer et recommencer</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
