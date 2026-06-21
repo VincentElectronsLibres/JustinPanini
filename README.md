@@ -1,8 +1,11 @@
-# ⚽ Mon Album Panini — Coupe du Monde FIFA 2026
+# ⚽ Album Panini de Justin — Coupe du Monde FIFA 2026 🇮🇹
 
 Application web simple (HTML/CSS/JS, aucune dépendance, aucun serveur) pour aider à compléter
 l'album Panini de la Coupe du Monde 2026 : rechercher une référence, marquer les cartes collées,
 gérer les doubles à échanger, et garder une sauvegarde.
+
+Petit clin d'œil spécial : pour entrer, il faut le mot de passe **ET** confirmer qu'on est
+un grand fan de l'Italie 🇮🇹😄
 
 ## 📦 Contenu du dossier
 
@@ -23,17 +26,20 @@ gérer les doubles à échanger, et garder une sauvegarde.
 
 C'est ce lien que ton fils utilisera, sur PC, tablette ou téléphone, via son navigateur.
 
-## 🔑 Changer le mot de passe
+## 🔑 Mot de passe et question fan
 
 Le mot de passe est défini tout en haut du fichier `app.js` :
 
 ```js
-const APP_PASSWORD = "messi2026";
+const APP_PASSWORD = "Italie";
 ```
 
-Remplace `"messi2026"` par le mot de passe de ton choix avant de mettre le site en ligne.
+Une fois le bon mot de passe entré, il faut en plus répondre **OUI** à la question
+"Est-ce que tu es le plus grand fan de l'Italie ?" pour accéder à l'album. Si on répond NON,
+un petit message s'affiche mais rien d'autre ne se passe — on peut toujours changer d'avis
+et cliquer sur OUI 😉
 
-⚠️ **Important** : sur un site statique GitHub Pages, ce mot de passe est visible dans le code
+⚠️ **Important** : sur un site statique GitHub Pages, le mot de passe est visible dans le code
 source par quiconque saurait où regarder. C'est suffisant pour dissuader un visiteur de passage,
 mais ce n'est pas un vrai système de sécurité. Ne mets rien de confidentiel derrière.
 

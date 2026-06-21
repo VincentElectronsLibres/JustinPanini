@@ -3,9 +3,10 @@
    =========================================================== */
 
 // ⚠️ Change ce mot de passe avant de mettre ton site en ligne !
-const APP_PASSWORD = "messi2026";
+const APP_PASSWORD = "Italie";
 
 const LS_AUTH = "panini2026_auth";
+const LS_FAN = "panini2026_fan";
 const LS_COLLECTION = "panini2026_collection";
 const LS_HISTORY = "panini2026_history";
 const LS_RECENT = "panini2026_recent";
@@ -92,28 +93,50 @@ function undoLast(){
 function checkAuth(){
   return sessionStorage.getItem(LS_AUTH) === "ok" || localStorage.getItem(LS_AUTH) === "ok";
 }
+function checkFan(){
+  return localStorage.getItem(LS_FAN) === "ok";
+}
 
 document.getElementById('login-form').addEventListener('submit', function(e){
   e.preventDefault();
   const val = document.getElementById('login-password').value;
   if(val === APP_PASSWORD){
     localStorage.setItem(LS_AUTH, "ok");
-    showApp();
+    if(checkFan()){
+      showApp();
+    } else {
+      document.getElementById('login-screen').hidden = true;
+      document.getElementById('fan-screen').hidden = false;
+    }
   } else {
     document.getElementById('login-error').hidden = false;
     document.getElementById('login-password').value = "";
   }
 });
 
+document.getElementById('fan-yes').addEventListener('click', function(){
+  localStorage.setItem(LS_FAN, "ok");
+  document.getElementById('fan-screen').hidden = true;
+  showApp();
+});
+
+document.getElementById('fan-no').addEventListener('click', function(){
+  document.getElementById('fan-message').hidden = false;
+});
+
 document.getElementById('logout-btn').addEventListener('click', function(){
   localStorage.removeItem(LS_AUTH);
+  localStorage.removeItem(LS_FAN);
   sessionStorage.removeItem(LS_AUTH);
   document.getElementById('app').hidden = true;
+  document.getElementById('fan-screen').hidden = true;
+  document.getElementById('fan-message').hidden = true;
   document.getElementById('login-screen').hidden = false;
 });
 
 function showApp(){
   document.getElementById('login-screen').hidden = true;
+  document.getElementById('fan-screen').hidden = true;
   document.getElementById('app').hidden = false;
   initApp();
 }
@@ -228,12 +251,16 @@ document.getElementById('undo-btn').addEventListener('click', ()=>{
   renderSearchResult(searchInput.value.trim().toUpperCase());
 });
 
+// Mémorise quelles sections (équipes) sont actuellement dépliées,
+// pour qu'elles ne se referment pas toutes seules après un clic.
+let openSections = new Set();
+
 // ---------- Album ----------
 function renderAlbum(){
   // Section spéciale
   const specials = STICKERS.filter(s=>s.special);
   const specialBox = document.getElementById('special-section');
-  specialBox.innerHTML = teamSectionHTML('special', '⭐ Cartes spéciales', specials);
+  specialBox.innerHTML = teamSectionHTML('special', '⭐ Cartes spéciales 🇮🇹', specials);
   bindTeamSection(specialBox);
 
   const filterVal = document.getElementById('team-filter').value.trim().toLowerCase();
@@ -251,8 +278,9 @@ function renderAlbum(){
 
 function teamSectionHTML(id, title, stickers){
   const owned = stickers.filter(s=>getCount(s.code)>0).length;
+  const isOpen = openSections.has(id);
   return `
-  <div class="team-section" id="section-${id}">
+  <div class="team-section ${isOpen ? 'open' : ''}" id="section-${id}">
     <div class="team-header">
       <h3>${title}</h3>
       <div style="display:flex;align-items:center;gap:8px;">
@@ -272,9 +300,10 @@ function stickerTileHTML(s){
   const count = getCount(s.code);
   const cls = count===0 ? '' : (count===1 ? 's-owned' : 's-double');
   return `<div class="sticker-tile ${cls}" data-code="${s.code}">
-      ${count>1 ? `<span class="dup-badge">${count}</span>` : ''}
+      ${count>1 ? `<button class="dup-badge" data-action="dec" data-code="${s.code}" title="Retirer un double">x${count}</button>` : ''}
       <span class="t-code">${s.code}</span>
       <span class="t-name">${escapeHtml(shortName(s))}</span>
+      ${count>=1 ? `<button class="dup-add" data-action="inc" data-code="${s.code}" title="J'en ai un double">+</button>` : ''}
     </div>`;
 }
 
@@ -288,14 +317,32 @@ function bindTeamSection(root){
   const section = root.classList && root.classList.contains('team-section') ? root : root.querySelector('.team-section');
   if(!section) return;
   const header = section.querySelector('.team-header');
-  header.addEventListener('click', ()=> section.classList.toggle('open'));
+  header.addEventListener('click', ()=>{
+    section.classList.toggle('open');
+    const id = section.id.replace('section-', '');
+    if(section.classList.contains('open')) openSections.add(id);
+    else openSections.delete(id);
+  });
+
+  section.querySelectorAll('button.dup-add, button.dup-badge').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const code = btn.dataset.code;
+      const cur = getCount(code);
+      if(btn.dataset.action === 'inc'){
+        setCount(code, cur + 1 < 2 ? 2 : cur + 1);
+      } else if(btn.dataset.action === 'dec'){
+        setCount(code, Math.max(1, cur - 1));
+      }
+    });
+  });
+
   section.querySelectorAll('.sticker-tile').forEach(tile=>{
     tile.addEventListener('click', (e)=>{
-      e.stopPropagation();
+      if(e.target.closest('button')) return; // géré par les boutons +/x ci-dessus
       const code = tile.dataset.code;
       const cur = getCount(code);
-      const next = cur === 0 ? 1 : (cur === 1 ? 2 : 0); // cycle: manque -> j'ai -> double -> manque
-      setCount(code, next);
+      setCount(code, cur === 0 ? 1 : 0); // bascule simple : j'ai / j'ai pas
     });
   });
 }
@@ -452,6 +499,9 @@ function initApp(){
 }
 
 // Démarrage
-if(checkAuth()){
+if(checkAuth() && checkFan()){
   showApp();
+} else if(checkAuth() && !checkFan()){
+  document.getElementById('login-screen').hidden = true;
+  document.getElementById('fan-screen').hidden = false;
 }
