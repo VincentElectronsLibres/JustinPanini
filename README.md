@@ -1,11 +1,11 @@
-# ⚽ Album Panini de Justin — Coupe du Monde FIFA 2026 🇮🇹
+# ⚽ Album Panini de Justin — Coupe du Monde FIFA 2026 🇧🇪
 
 Application web simple (HTML/CSS/JS, aucune dépendance, aucun serveur) pour aider à compléter
 l'album Panini de la Coupe du Monde 2026 : rechercher une référence, marquer les cartes collées,
 gérer les doubles à échanger, et garder une sauvegarde.
 
 Petit clin d'œil spécial : pour entrer, il faut le mot de passe **ET** confirmer qu'on est
-un grand fan de l'Italie 🇮🇹😄
+un grand fan de la Belgique 🇧🇪😄
 
 ## 📦 Contenu du dossier
 
@@ -31,11 +31,11 @@ C'est ce lien que ton fils utilisera, sur PC, tablette ou téléphone, via son n
 Le mot de passe est défini tout en haut du fichier `app.js` :
 
 ```js
-const APP_PASSWORD = "Italie";
+const APP_PASSWORD = "Belgique";
 ```
 
 Une fois le bon mot de passe entré, il faut en plus répondre **OUI** à la question
-"Est-ce que tu es le plus grand fan de l'Italie ?" pour accéder à l'album. Si on répond NON,
+"Est-ce que tu es le plus grand supporter de la Belgique ?" pour accéder à l'album. Si on répond NON,
 un petit message s'affiche mais rien d'autre ne se passe — on peut toujours changer d'avis
 et cliquer sur OUI 😉
 

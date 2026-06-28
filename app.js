@@ -3,7 +3,7 @@
    =========================================================== */
 
 // ⚠️ Change ce mot de passe avant de mettre ton site en ligne !
-const APP_PASSWORD = "Italie";
+const APP_PASSWORD = "Belgique";
 
 const LS_AUTH = "panini2026_auth";
 const LS_FAN = "panini2026_fan";
@@ -260,7 +260,7 @@ function renderAlbum(){
   // Section spéciale
   const specials = STICKERS.filter(s=>s.special);
   const specialBox = document.getElementById('special-section');
-  specialBox.innerHTML = teamSectionHTML('special', '⭐ Cartes spéciales 🇮🇹', specials);
+  specialBox.innerHTML = teamSectionHTML('special', '⭐ Cartes spéciales 🇧🇪', specials);
   bindTeamSection(specialBox);
 
   const filterVal = document.getElementById('team-filter').value.trim().toLowerCase();

@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root{
-  /* Palette aux couleurs de l'Italie (vert / blanc / rouge) */
-  --pitch-dark:#004225;
-  --pitch:#008C45;
-  --pitch-light:#4ea876;
-  --line:#eef7ee;
-  --cream:#F4F5F0;
-  --ink:#16241c;
-  --ink-soft:#4a5d52;
-  --gold:#CD212A;
-  --gold-dark:#9c1820;
-  --red:#9c1820;
+  /* Palette aux couleurs de la Belgique (noir / jaune / rouge) */
+  --pitch-dark:#0a0a0a;
+  --pitch:#ED2939;
+  --pitch-light:#f08e96;
+  --line:#f2f2f2;
+  --cream:#FAFAF8;
+  --ink:#1a1a1a;
+  --ink-soft:#5a5a5a;
+  --gold:#FAE042;
+  --gold-dark:#caa90a;
+  --red:#2b2b2b;
   --blue:#2c6e9b;
   --radius:14px;
-  --shadow:0 4px 14px rgba(0,66,37,.18);
+  --shadow:0 4px 14px rgba(0,0,0,.22);
 }
 
 *{box-sizing:border-box;}
@@ -32,7 +32,7 @@ html.fan-pending #fan-screen{display:flex !important;}
 body{
   font-family:'Inter',system-ui,sans-serif;
   background:
-    repeating-linear-gradient(0deg, var(--pitch) 0 60px, var(--pitch-light) 60px 120px);
+    repeating-linear-gradient(0deg, var(--pitch) 0 60px, var(--pitch-dark) 60px 120px);
   color:var(--ink);
   min-height:100vh;
 }
@@ -69,14 +69,14 @@ input{font-family:inherit;}
 #login-form button:active{transform:scale(0.97);}
 .login-error{color:var(--red);font-weight:600;margin-top:14px;}
 
-/* ---------- ÉCRAN "ES-TU FAN DE L'ITALIE ?" ---------- */
+/* ---------- ÉCRAN "ES-TU SUPPORTER DE LA BELGIQUE ?" ---------- */
 .fan-question{color:var(--ink-soft);font-weight:700;font-size:16px;margin:6px 0 20px;line-height:1.4;}
 .fan-buttons{display:flex;gap:10px;}
 .fan-btn{
   flex:1;padding:14px 8px;border-radius:12px;border:none;font-weight:700;font-size:15px;font-family:'Baloo 2';
 }
 .fan-btn-yes{background:var(--pitch);color:#fff;}
-.fan-btn-no{background:#f1e9e9;color:var(--red);}
+.fan-btn-no{background:#ebebeb;color:var(--red);}
 .fan-btn:active{transform:scale(.96);}
 .fan-message{margin-top:16px;color:var(--gold-dark);font-weight:700;background:#fff3f0;border-radius:10px;padding:12px;font-size:14px;line-height:1.4;}
 
@@ -88,7 +88,7 @@ input{font-family:inherit;}
 }
 .app-header::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:6px;
-  background:linear-gradient(to right, var(--pitch) 0 33.33%, #fff 33.33% 66.66%, var(--gold) 66.66% 100%);
+  background:linear-gradient(to right, #000 0 33.33%, var(--gold) 33.33% 66.66%, var(--pitch) 66.66% 100%);
 }
 .header-top{display:flex;align-items:center;justify-content:space-between;}
 .app-header h1{font-size:20px;}
@@ -121,7 +121,7 @@ input{font-family:inherit;}
   background:#fff;border-radius:16px;padding:18px;box-shadow:var(--shadow);
   border:2px dashed #cfe0d2;position:relative;
 }
-.result-card.owned{border-color:var(--pitch-light);background:#f3fbf3;}
+.result-card.owned{border-color:var(--pitch-light);background:#fdeef0;}
 .result-card.double{border-color:var(--gold);background:#fffaf0;}
 .result-code{font-family:'Baloo 2';font-size:26px;color:var(--pitch-dark);}
 .result-foil{display:inline-block;background:linear-gradient(45deg,#ffd700,#fff6c2,#ffd700);color:#7a5b00;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px;}
@@ -137,7 +137,7 @@ input{font-family:inherit;}
 }
 .btn-have{background:var(--pitch);color:#fff;}
 .btn-double{background:var(--gold);color:var(--pitch-dark);}
-.btn-remove{background:#f1e9e9;color:var(--red);}
+.btn-remove{background:#ebebeb;color:var(--red);}
 .result-actions button:active{transform:scale(.96);}
 .result-notfound{color:var(--ink-soft);text-align:center;padding:20px;font-weight:600;}
 
@@ -153,7 +153,7 @@ input{font-family:inherit;}
 .recent-chip{
   background:#fff;border:1px solid #dde8de;padding:6px 12px;border-radius:20px;font-weight:700;font-size:13px;
 }
-.recent-chip.owned{background:#e7f7ea;border-color:var(--pitch-light);}
+.recent-chip.owned{background:#fbe3e6;border-color:var(--pitch-light);}
 .recent-chip.double{background:#fff3da;border-color:var(--gold);}
 .recent-chip.missing{background:#fdecea;border-color:#f1b3ad;}
 
@@ -182,7 +182,7 @@ input{font-family:inherit;}
 }
 .sticker-tile .t-code{font-weight:800;font-family:'Baloo 2';font-size:13px;color:var(--ink);}
 .sticker-tile .t-name{color:var(--ink-soft);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sticker-tile.s-owned{border-style:solid;border-color:var(--pitch-light);background:#eaf8ec;}
+.sticker-tile.s-owned{border-style:solid;border-color:var(--pitch-light);background:#fbe6e8;}
 .sticker-tile.s-owned .t-code{color:var(--pitch-dark);}
 .sticker-tile.s-double{border-style:solid;border-color:var(--gold);background:#fff6dd;}
 .sticker-tile .badge2{position:absolute;}
